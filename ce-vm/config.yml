@@ -1,0 +1,6 @@
+---
+
+project_name: ce-vm-docs 
+project_type: custom
+services:
+ - mkdocs
