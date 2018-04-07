@@ -1,3 +1,4 @@
+[![Build Status](https://readthedocs.org/projects/ce-vm/badge/?version=latest)](https://readthedocs.org/projects/ce-vm/badge/?version=latest)
 # Documentation for the ce-vm stack
 
 This is a companion repository to the main ce-vm stack. 
