@@ -27,6 +27,8 @@ Docker integration is less tested on our side, and does not bring any performanc
 
 In a nutshell: VirtualBox is the failsafe option, you should stick with it unless you are on Linux AND you are familiar with Docker filesystem mount permissions.
 
+**Note: Due to the way networking is set up, you cannot switch from one provider to the other without rebooting your host. Failing to do so will result in containers/VMS that are not reachable.**
+
 ## VirtualBox provider
 
 Make sure you have the latest version from [www.virtualbox.org](https://www.virtualbox.org).
@@ -42,21 +44,24 @@ It should work out of the box on all platforms, but you should check the file sh
 
 You will need to install the "Edge" version from [docs.docker.com](https://docs.docker.com/docker-for-mac/install/).
 
-No further configuration should be needed, besides allocating enough memory to the daemon in the Docker app preferences.
+Besides allocating enough memory to the daemon in the Docker app preferences, you will need to use an host entry, as there currently is no way to reach the internal IP from the host and only port forwarding is supported (see [docs.docker.com](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds)).
 
-*It is in practice possible to use ce-vm with the stable Docker release by adding an entry for `127.0.0.1 app-vm.codeenigma.com` in your /etc/hosts files, but the performances are (as of this writing) really, really poor due to the bind/mount filesystem.*
+Add an entry for `127.0.0.1 app-vm.codeenigma.com` in your /etc/hosts files.
+
+*It is in practice possible to use ce-vm with the stable Docker release, but the performances are (as of this writing) really, really poor due to the bind/mount filesystem.*
+
 
 ### Windows host
 
 We don't have anyone using Windows internally, so this is untested, but instructions should be the same than on Mac OS. 
 
-Simply install the "Edge" version from [docs.docker.com](https://docs.docker.com/docker-for-windows/install/).
+Simply install the "Edge" version from [docs.docker.com](https://docs.docker.com/docker-for-windows/install/) and add an entry in your C:\Windows\System32\Drivers\etc\hosts file.
 
 ### Linux host
 
 Refer to [docs.docker.com](https://docs.docker.com/engine/installation/) for the daemon installation for your platform.
 
-Running Docker on a Linux host presents a significant performance boost over VirtualBox. This is due to the fact that shared folders are actually direct mount and do not need any binding. This is also the cause for the main issues you will face.
+Running Docker on a Linux host presents a significant performance boost over VirtualBox. This is in great part due to the fact that shared folders are actually direct mount and do not need any binding. This is also the cause for the main issues you will face.
 
 In practice, this means there is no user mapping on file ownership of the directories accessed by both your host and the container, so user and group will be the same for both.
 
@@ -65,17 +70,19 @@ In practice, this means there is no user mapping on file ownership of the direct
 The Docker daemon can only be managed by the root user by default. This means you either have to:
 
 - Run each and every `vagrant` command using sudo. While this work, it also mean that the ce-vm base will get installed under the root user home dir instead of yours, and that all files, including your codebase will be owned by the root user.
-- Add yourself to the "docker" group, so you can run `vagrant` commands as your standard unprivileged user (see [docs.docker.com](https://docs.docker.com/engine/installation/linux/linux-postinstall/) for details. It does partially solve the issue, but:
-  1. This poses a security risk you need to be aware of and understand. See [https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface). You can also have a look at [https://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/](https://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/) for alternative approaches.
+- Add yourself to the "docker" group, so you can run `vagrant` commands as your standard unprivileged user - see [docs.docker.com](https://docs.docker.com/engine/installation/linux/linux-postinstall/) for details. It does solve the issue, but this poses a security risk you need to be aware of and understand. See [https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface). You can also have a look at [https://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/](https://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/) for alternative approaches.
 
 #### Issue 2. File ownership
 
 As explained above, contrary to the non-native implementation on Mac or Windows, 
 there is no mapping of ownership on the filesystem. 
-A file owned by user "vagrant" (1001) or "www-data" (33) on the container 
-will have the same numeric owner (1001 or 33 in our example) on the host machine. 
-If your user id on the host is 1001, which is the most common situation, 
-you should be fine. We working on a solution for other cases.
+A file owned by user "vagrant" (1000) or "www-data" (33) on the container 
+will have the same numeric owner (1000 or 33 in our example) on the host machine. 
+The only workaroud for now is to change the ID of the vagrant user on the guest to match your local user, which is done by setting the following variables:
+```
+docker_vagrant_user_uid: 1000
+docker_vagrant_group_gid: 1000
+```
 
 # ce-vm
 
@@ -87,7 +94,3 @@ The "stack' itself will install itself when you `vagrant up` for the time.
 
 This will git clone the main ce-vm repo from https://github.com/codeenigma/ce-vm/ 
 as ~/.CodeEnigma/ce-vm/ce-vm-upstream on your host.
-
-**Note: there is a known issue that prevent the first ever instance you launch 
-to be properly provisioned. Re-trigger the provisioning 
-with `vagrant reload --provision`. This is not needed for subsequent instances.**
