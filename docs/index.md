@@ -3,11 +3,13 @@
 
 Spins up a LAMP environment using Docker containers, managed and orchestrated with Vagrant.
 
-It will also generate codebase and suitable settings for either:
+It will generate ready-made codebase and suitable settings for either:
 
 - Drupal
 - Symfony
 - Wordpress
+
+but can be used for any other kind of php based web app.
 
 It aims to be both:
 
