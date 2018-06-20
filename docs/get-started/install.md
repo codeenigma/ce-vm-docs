@@ -44,7 +44,7 @@ The Docker daemon can only be managed by the root user by default. As with any o
 under the root user home dir instead of yours, and that all files, including your codebase will be owned by the root user.
 In practice, this is very unpractical.
 - Add yourself to the "docker" group, so you can run `vagrant` commands as your standard unprivileged user - see [docs.docker.com](https://docs.docker.com/engine/installation/linux/linux-postinstall/) for details. It does solve the issue, but this poses a security risk you need to be aware of and understand. See [here for details](https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface). Some users tend to just "live with it" as it is the most convenient solution, but we strongly advise you not to do this.
-- The recommended solution -until it gets fixed in [vagrant](https://github.com/hashicorp/vagrant/issues/8111)- is to wrap 'docker' so it forces a sudo call. See the [tips](/tips/scripts/#vagrant-docker-sudo.sh) section for usage.
+- The recommended solution -until it gets fixed in [vagrant](https://github.com/hashicorp/vagrant/issues/8111)- is to wrap 'docker' so it forces a sudo call. See the [tips](/tips/scripts/#docker-sudo.sh) section for usage.
 
 
 ## ce-vm

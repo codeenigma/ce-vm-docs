@@ -8,7 +8,7 @@ You can turn off the automatic pulling by setting the "ce_vm_upstream_auto_pull"
 Any updates that break backward compatibilty (change in Vagrantfile, structure, ...) is considered a "major" release and is not automatically applied.
 
 It is normally possible to keep using different major version in parallel (eg. 3.x for some projects, 4.x for others), so existing projects should still continue to work without porting them to a new version. 
-After a while though, version requirements for Vagrant/Docker/VBox will necessarily diverge.
+After a while though, version requirements for Vagrant/Docker will necessarily diverge.
 
 ### 3.x > 4.x
 Version 4.x drops support for VirtualBox, and remove the use of the vagrant-triggers plugin (as it is not longer maintained). If you want your existing project to continue working, stick with Vagrant 1.9.1.

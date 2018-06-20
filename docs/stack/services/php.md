@@ -43,7 +43,7 @@ The app VM also ships with the following PHP tools:
 You can (and probably should) specify a GitHub token to use with Composer to avoid 
 hitting the API rate limit,
 using the composer_github_oauth_token variable. Preferably set this in your custom 
-~/.CodeEnigma/ce-vm/ce-vm-custom/config.yml file instead of the project config.yml.
+~/.CodeEnigma/ce-vm/5.x/ce-vm-custom/config.yml file instead of the project config.yml.
 
 ## PHP_CodeSniffer
 

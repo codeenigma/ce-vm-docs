@@ -27,9 +27,9 @@ myproject // This is the root of the project
   docs // Additional folders and files may appear (drush, composer.json, ...)
 ```
 
-Once the process is finished just open [http://dashboard.ce-vm.local](http://dashboard.ce-vm.local) in your browser.
+Once the process is finished just open [http://dashboard.ce-vm.local](http://dashboard.ce-vm.local) in your browser for more details.
 
-## Vagrant
+## Vagrant & Docker containers
 
 While everything runs in Docker containers, you should in most cases not interact with them using docker commands directly, but instead use the Vagrant layer. 
 
@@ -45,12 +45,12 @@ The only commands you need to know for a start are:
 
 *You can also target a given container only, by specifying the target "machine": `vagrant halt mysql, vagrant ssh cli, ...` see [vagrantup.com](https://www.vagrantup.com/docs/multi-machine/#controlling-multiple-machines)*
 
+The exact number and nature of containers created for a given project depends on the chosen options, as detailed in the [stack overview](/stack/overview).
 
-
-# Shared folders
+## Shared folders
 
 The project's root, *myproject* in this example, will be mounted as */vagrant* on the guest and anything in there can be edited indifferently from both the guest and the host.
 
 *There is also an additional mount of ~/.CodeEnigma to /home/vagrant/.CodeEnigma, mostly reserved for provisioning and internal use*
 
-The various options available for the way those shared folders play a crucial role in the performance ov your setup, and are also the major cause of issues.
+The various options available for the way those shared folders play a crucial role in the performance of your setup, and are also the major cause of issues.

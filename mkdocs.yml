@@ -15,14 +15,13 @@ pages:
     - Configuration: config/config.md
     - Ansible customization: config/ansible.md
   - Stack details:
-    - The "App" instance: stack/app.md
-    - The "Database" instance: stack/db.md
-    - Components:
-      - NGINX: stack/components/nginx.md
-      - PHP: stack/components/php.md
-      - Postfix: stack/components/postfix.md
-      - Selenium: stack/components/selenium.md
-      - Solr: stack/components/solr.md
+    - Overview: stack/overview.md
+    - Services:
+      - Syslog: stack/services/log.md
+      - Dashboard: stack/services/dashboard.md
+      - NGINX: stack/services/nginx.md
+      - PHP: stack/services/php.md
+      - Solr: stack/services/solr.md
   - Tips & recipes:
       - Wrapper scripts: tips/scripts.yml
       - SSH: tips/ssh.yml
@@ -31,3 +30,4 @@ pages:
       - Shared mounts: topics/shared-mounts.md
       - Security: topics/security.md
       - Networking: topics/networking.md
+      - Email: topics/postfix.md

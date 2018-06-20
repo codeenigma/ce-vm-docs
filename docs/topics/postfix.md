@@ -11,7 +11,7 @@ your config file. It can take one of the following values:
 
 ### host
 This is the default behaviour. All emails are stored as .eml files in a
-ce-vm/var/$vm/Maildir folder, accessible from your host.
+ce-vm/var/$service/Maildir folder, accessible from your host.
 You can then conveniently open then in the destop mail client of your choice.
 
 ### local

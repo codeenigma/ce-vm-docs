@@ -1,6 +1,8 @@
 ---
 
-project_name: ce-vm-docs 
+
+net_base: 192.168.58
+project_name: cevmdocs 
 project_type: custom
 services:
  - mkdocs

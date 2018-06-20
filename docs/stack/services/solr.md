@@ -2,12 +2,9 @@
 [http://lucene.apache.org/solr](http://lucene.apache.org/solr)
 
 ## Base setup
-Installation of Apache Solr is triggered by the ```solr``` variable in your config.yml file (yes/no value).
 By default, Solr 4.6.1 will be created with a "default" core, and the minimal
 configuration shipped in the examples modules. It uses Tomcat7 as server, listening on port 8080.
 
-The admin interface will be available at http://db-vm.codeenigma.com:8080/solr
-and the default core at http://db-vm.codeenigma.com:8080/solr/default (eg http://db-vm.codeenigma.com:8080/solr/default/select?q=*%3A*&wt=json&indent=true).
 
 ### Configuring cores
 You can define as many cores as needed, using the ```solr_cores``` variables. 
