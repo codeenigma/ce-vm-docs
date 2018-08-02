@@ -15,7 +15,7 @@ your ~/.CodeEnigma/ce-vm/5.x/ce-vm-custom folder so that it applies to all of yo
 Refer to ["Ansible customisation"](config/) for details, but in a nutshell: 
 
 - copy the ce-vm/examples/ce-vm-custom folder that comes with the template you have generated at [http://ce-vm.codeenigma.net](http://ce-vm.codeenigma.net) to ~/.CodeEnigma/ce-vm/5.x/ce-vm-custom (if you don't have one already).
-- edit ~/.CodeEnigma/ce-vm/5.x/ce-vm-custom/app.yml and uncomment the custom.ssh role line
+- edit ~/.CodeEnigma/ce-vm/5.x/ce-vm-custom/ansible/app.yml and uncomment the custom.ssh role line
 - edit the example template in the matching role (~/.CodeEnigma/ce-vm/5.x/ce-vm-custom/ansible/roles/custom.ssh/templates/config.j2) to your needs
 
 The example looks like this, and you will of course need to replace hosts and username with your own:
